@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            {% for col in header %}
+            <th scope="col">{{ col }}</th>
+            {% endfor %}
+            <th><a href="add">➕</a></th>
+        </tr>
+    </thead>
+    {% for row in rows %}
+    <tr>
+        {% if not func %}
+            {% for cell in row %}
+            <td>
+                {{ cell }}
+            </td>
+            {% endfor %}
+        {% else %}
+            {% for cell in func(row) %}
+            <td>
+                {{ cell }}
+            </td>
+            {% endfor %}
+        {% endif %}
+        <td>
+            <a href="{{ row[0] }}">📝</a>
+        </td>
+        <td>
+            <a href="#" onclick="remove({{ row[0] }})">❌</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<script>
+    function remove(id) {
+        if (confirm('Подтвердите удаление строки ' + id)) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('DELETE', id, false);
+            xhr.send()
+            if (xhr.status == 200) {
+                window.location.reload(false);
+            } else {
+                alert('Произошла ошибка\n' + xhr.responseText);
+            }
+        }
+    }
+</script>
+{% endblock %}

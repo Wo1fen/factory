@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" /> 
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <title>Промышленное предприятие</title>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <nav class="navbar navbar-expand-md bg-light">
+                    <ul class="navbar-nav">
+                        <li>
+                            <a class="p-2" href="{{ url_for('client') }}">Клиенты</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('workshop') }}">Цеха</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('factory') }}">Заводы</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('position') }}">Должность</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('production') }}">Продукция</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('order') }}">Заказ</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('release') }}">Выпуск</a>
+                        </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('worker') }}">Рабочие</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    {{ message|safe }}
+                {% endfor %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+        
+    </body>
+</html>
