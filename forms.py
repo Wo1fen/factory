@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, SubmitField
-from wtforms.fields import SelectField
+from wtforms.fields import SelectField, PasswordField
 from wtforms.fields.html5 import DateTimeField
 from wtforms.validators import DataRequired, Length, ValidationError
 from datetime import datetime
@@ -61,7 +61,7 @@ class ReleaseForm(FlaskForm):
         validate_type(field.data, int, 'Количество должно быть числом!')
     
     def validate_weight(form, field):
-        validate_type(field.data, int, 'Вес должен быть числом!')
+        validate_type(field.data, float, 'Вес должен быть числом!')
 
 
 class WorkshopForm(FlaskForm):
@@ -80,6 +80,13 @@ class PositionForm(FlaskForm):
 
     def validate_salary(form, field):
         validate_type(field.data, int, 'Зарплата должна быть числом!')
+
+
+class LoginForm(FlaskForm):
+    username = StringField('Имя пользователя', validators=[DataRequired()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
+    submit = SubmitField('Отправить')
+
 
 def validate_type(value, value_type, message):
     try:

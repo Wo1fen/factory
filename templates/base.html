@@ -10,7 +10,7 @@
         <div class="container">
             <header>
                 <nav class="navbar navbar-expand-md bg-light">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav md-auto">
                         <li>
                             <a class="p-2" href="{{ url_for('client') }}">Клиенты</a>
                         </li>
@@ -35,10 +35,17 @@
                         <li>
                             <a class="p-2" href="{{ url_for('worker') }}">Рабочие</a>
                         </li>
+                        <li>
+                            <a class="p-2" href="{{ url_for('logs') }}">Логи</a>
+                        </li>
                     </ul>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}">Выход</a>
+                    {% endif %}
                 </nav>
             </header>
         </div>
+        
         <div class="container">
             {% with messages = get_flashed_messages() %}
                 {% for message in messages %}

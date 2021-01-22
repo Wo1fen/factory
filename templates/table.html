@@ -3,11 +3,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             {% for col in header %}
             <th scope="col">{{ col }}</th>
             {% endfor %}
+            {% if not read_only %}
             <th><a href="add">➕</a></th>
+            {% endif %}
         </tr>
     </thead>
     {% for row in rows %}
@@ -25,12 +26,14 @@
             </td>
             {% endfor %}
         {% endif %}
+        {% if not read_only %}
         <td>
             <a href="{{ row[0] }}">📝</a>
         </td>
         <td>
             <a href="#" onclick="remove({{ row[0] }})">❌</a>
         </td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>
